@@ -7,11 +7,11 @@ assignees: ''
 
 ---
 
-**Problem**
-Description here.
+# Problem
+Describe the issue or feature.
 
-**Solution**
-Description here.
+# Task
+Describe what needs to be done.
 
-**Additional Notes**
-Description here.
+# Additional Notes
+Write any additional notes here.
