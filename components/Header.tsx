@@ -3,6 +3,8 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "@/constants/Colors";
 import CustomText from "./CustomText";
+import { usePathname } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function Header() {
   return (
