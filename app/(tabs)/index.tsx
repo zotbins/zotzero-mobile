@@ -26,12 +26,13 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.black,
+    backgroundColor: Colors.white,
     paddingHorizontal: 20,
     paddingVertical: 50,
   },
   text: {
     color: Colors.white,
+    fontSize: 16,
   },
   button: {
     alignItems: "center",

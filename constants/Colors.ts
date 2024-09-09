@@ -3,5 +3,6 @@ export default {
   grey: "#242424",
   white: "#FCFCFC",
   tintColor: "#79b880",
-  blue: "#97E0F7",
+  blue: "#66aec4",
+  red: "#fc6565",
 };

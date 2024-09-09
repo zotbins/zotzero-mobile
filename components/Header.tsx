@@ -8,7 +8,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 export default function Header() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.black }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
       <View
         style={{
           flexDirection: "row",
@@ -18,7 +18,7 @@ export default function Header() {
           paddingHorizontal: 20,
         }}
       >
-        <Text style={{ fontWeight: "bold", color: Colors.white, fontSize: 16 }}>
+        <Text style={{ fontWeight: "bold", color: Colors.black, fontSize: 16 }}>
           ZotBins
         </Text>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
