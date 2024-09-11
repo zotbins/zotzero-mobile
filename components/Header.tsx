@@ -6,7 +6,7 @@ import CustomText from "./CustomText";
 import { usePathname } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function Header() {
+const Header = () => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
       <View
@@ -35,4 +35,5 @@ export default function Header() {
       </View>
     </SafeAreaView>
   );
-}
+};
+export default Header;
