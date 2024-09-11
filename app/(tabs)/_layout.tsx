@@ -11,21 +11,19 @@ export default function Layout() {
       <Tabs
         screenOptions={{
           tabBarStyle: {
-            backgroundColor: Colors.grey,
+            backgroundColor: Colors.white,
             position: "absolute",
-            bottom: 40,
+            bottom: 20,
             justifyContent: "center",
             alignSelf: "center",
             height: 63,
-            marginHorizontal: 50,
-            paddingHorizontal: 10,
+            marginHorizontal: 10,
+            paddingHorizontal: 0,
             paddingVertical: 8,
             paddingBottom: 8,
             borderRadius: 40,
-            borderWidth: 1,
-            borderTopWidth: 1,
-            borderColor: "#333",
-            borderTopColor: "#333",
+
+            borderColor: Colors.white,
           },
           tabBarShowLabel: false,
           tabBarInactiveTintColor: "#999",
@@ -40,7 +38,7 @@ export default function Layout() {
                 style={{
                   padding: 12,
                   borderRadius: 30,
-                  backgroundColor: focused ? Colors.tintColor : Colors.grey,
+                  backgroundColor: focused ? Colors.tintColor : Colors.white,
                 }}
               >
                 <AntDesign name="home" size={18} color={color} />
@@ -56,7 +54,7 @@ export default function Layout() {
                 style={{
                   padding: 12,
                   borderRadius: 30,
-                  backgroundColor: focused ? Colors.tintColor : Colors.grey,
+                  backgroundColor: focused ? Colors.tintColor : Colors.white,
                 }}
               >
                 <AntDesign name="scan1" size={18} color={color} />
@@ -72,7 +70,7 @@ export default function Layout() {
                 style={{
                   padding: 12,
                   borderRadius: 30,
-                  backgroundColor: focused ? Colors.tintColor : Colors.grey,
+                  backgroundColor: focused ? Colors.tintColor : Colors.white,
                 }}
               >
                 <AntDesign name="user" size={18} color={color} />
