@@ -13,15 +13,16 @@ import auth from "@react-native-firebase/auth";
 import { FirebaseError } from "firebase/app";
 import Colors from "@/constants/Colors";
 
-const Login = () => {
+const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const signIn = async () => {
+  const signUp = async () => {
     setLoading(true);
     try {
-      await auth().signInWithEmailAndPassword(email, password);
+      await auth().createUserWithEmailAndPassword(email, password);
+      alert("Check your email (setup email verification)!");
     } catch (e: any) {
       const err = e as FirebaseError;
       alert("Registration failed: " + err.message);
@@ -52,13 +53,13 @@ const Login = () => {
           <ActivityIndicator size={"small"} style={{ margin: 28 }} />
         ) : (
           <>
-            <Pressable style={styles.button} onPress={signIn}>
-              <Text style={styles.text}>Login</Text>
+            <Pressable style={styles.button} onPress={signUp}>
+              <Text style={styles.text}>Sign Up</Text>
             </Pressable>
             <View style={styles.link}>
-              <Link href="/signup">
+              <Link href="/login">
                 <Text style={{ color: Colors.blue }}>
-                  I don't have an account
+                  I already have an account
                 </Text>
               </Link>
             </View>
@@ -69,7 +70,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
 
 const styles = StyleSheet.create({
   container: {
