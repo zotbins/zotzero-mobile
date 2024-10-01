@@ -1,9 +1,20 @@
-import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
+import {
+  Platform,
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  Alert,
+} from "react-native";
 import React from "react";
 import Colors from "@/constants/Colors";
 import { Link, Stack } from "expo-router";
 import Header from "@/components/Header";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, {
+  Marker,
+  PROVIDER_GOOGLE,
+  PROVIDER_DEFAULT,
+} from "react-native-maps";
 import { markers } from "../../../assets/markers.js";
 
 const INITIAL_REGION = {
@@ -39,7 +50,9 @@ const Home = () => {
           showsUserLocation
           showsMyLocationButton
           // Later, add this line to switch to Google Maps (ios + android compatible):
-          // provider={PROVIDER_GOOGLE}
+          provider={
+            Platform.OS === "android" ? PROVIDER_GOOGLE : PROVIDER_DEFAULT
+          }
         >
           {markers.map((marker) => (
             <Marker
