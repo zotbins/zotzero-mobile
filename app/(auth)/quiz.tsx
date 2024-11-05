@@ -205,7 +205,7 @@ const Quiz = () => {
               {score} / {questions.length}
             </Text>
             <View style={{ paddingTop: 50 }}>
-              <Link href="/" asChild>
+              <Link href="/home" asChild>
                 <Pressable style={styles.button}>
                   <Text style={styles.text}>Back to Home</Text>
                 </Pressable>
