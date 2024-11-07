@@ -1,4 +1,4 @@
-import { View, Text, Button, Image, TouchableOpacity } from "react-native";
+import { View, Text, Button, Image, TouchableOpacity, Alert } from "react-native";
 import React, { useState } from "react";
 import Colors from "@/constants/Colors";
 import { Stack } from "expo-router";
@@ -15,7 +15,7 @@ const Profile = () => {
   const requestPermission = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== "granted") {
-      alert("Sorry, we need access to your photos to change your profile picture!");
+      Alert.alert("Sorry, we need camera roll permissions to add a profile picture!");
     }
   };
 
