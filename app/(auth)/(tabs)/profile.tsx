@@ -1,16 +1,18 @@
 import { View, Text, Button, Image, TouchableOpacity, Alert } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Colors from "@/constants/Colors";
 import { Stack } from "expo-router";
 import auth from "@react-native-firebase/auth";
 import storage from "@react-native-firebase/storage";
 import * as ImagePicker from "expo-image-picker";
+import firestore, { collection, getDocs } from "@react-native-firebase/firestore";
+import PasswordChange from "@/components/PasswordChange";
 
 const Profile = () => {
   const user = auth().currentUser;
 
   const [profilePic, setProfilePic] = useState<string>(user?.photoURL || "https://via.placeholder.com/250" );
-
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
 
   const requestPermission = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -70,6 +72,17 @@ const Profile = () => {
         <TouchableOpacity onPress={() => auth().signOut()} className="bg-blue-500 px-4 py-3 rounded-lg my-2">
           <Text className="text-white"> Sign Out </Text>
         </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => setShowPasswordForm(!showPasswordForm)} className="bg-blue-500 px-4 py-3 rounded-lg my-2">
+          <Text className="text-white text-center">
+            {showPasswordForm ? "Cancel Password Change" : "Change Password"}
+          </Text>
+        </TouchableOpacity>
+      
+      {/* Conditionally render the PasswordChange form */}
+      {showPasswordForm && <PasswordChange onComplete={() => setShowPasswordForm(false)} />}
+      
+
       </View>
     </>
   );
@@ -77,3 +90,34 @@ const Profile = () => {
 
 export default Profile;
 
+// code for displaying user's name
+// missing code snippets to connect user account to firebase 'users' collection
+
+// const [showPasswordForm, setShowPasswordForm] = useState(false);
+
+  // const [firstname, setFirstName] = useState<string>("");
+  // const [lastname, setLastName] = useState<string>("");
+
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     if (!user?.uid) return; // must be logged in
+
+  //     try {
+  //       // get the specific user document using their UID
+  //       const userDoc = await firestore().collection("users").doc(user.uid).get();
+
+  //       if (userDoc.exists) {
+  //         const userData = userDoc.data();
+  //         setFirstName(userData?.firstname);
+  //         setLastName(userData?.lastname);
+  //       } 
+  //       else {
+  //         console.log("User Document does not exist.");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching user data: ", error);
+  //     }
+  //   };
+
+  //   fetchUserData();
+  // }, [user?.uid]);
