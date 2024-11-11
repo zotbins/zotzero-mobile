@@ -1,6 +1,7 @@
 import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
 import React, { useState } from "react";
 import auth from "@react-native-firebase/auth";
+import Colors from "@/constants/Colors";
 
 const PasswordChangeForm = () => {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -86,11 +87,11 @@ const PasswordChangeForm = () => {
   };
 
   return (
-    <View className="w-full px-4">
+    <View className="w-64 px-4">
       <Text className="px-4 py-3 font-semibold">Change Password</Text>
       
       <TextInput 
-        className="px-4 py-3 my-2 rounded-lg bg-blue-500"
+        className="px-4 py-3 my-2 rounded-lg bg-slate-100"
         placeholder="Current Password"
         secureTextEntry
         value={currentPassword}
@@ -99,7 +100,7 @@ const PasswordChangeForm = () => {
       />
       
       <TextInput
-        className="px-4 py-3 my-2 rounded-lg bg-blue-500"
+        className="px-4 py-3 my-2 rounded-lg bg-slate-100"
         placeholder="New Password"
         secureTextEntry
         value={newPassword}
@@ -108,7 +109,7 @@ const PasswordChangeForm = () => {
       />
       
       <TextInput
-        className="px-4 py-3 my-2 rounded-lg bg-blue-500"
+        className="px-4 py-3 my-2 rounded-lg bg-slate-100"
         placeholder="Confirm New Password"
         secureTextEntry
         value={confirmPassword}
@@ -119,7 +120,7 @@ const PasswordChangeForm = () => {
       <TouchableOpacity
         onPress={handleChangePassword}
         disabled={loading}
-        className={`px-4 py-3 rounded-lg ${
+        className={`px-4 py-3 my-2 rounded-lg ${
           loading ? "bg-blue-300" : "bg-blue-500"
         }`}
       >
