@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import auth from "@react-native-firebase/auth";
 import Colors from "@/constants/Colors";
 
-const PasswordChangeForm = () => {
+interface PasswordChangeFormProps {
+  onComplete: () => void;
+}
+
+const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onComplete }) => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -38,11 +42,12 @@ const PasswordChangeForm = () => {
 
   const handleChangePassword = async () => {
     if (!validatePasswords()) return;
+    if (!user || !user.email) return;
     
     setLoading(true);
     try {
       const credential = auth.EmailAuthProvider.credential(
-      user?.email,
+      user.email,
       currentPassword
     );
     
@@ -58,12 +63,12 @@ const PasswordChangeForm = () => {
           setCurrentPassword("");
           setNewPassword("");
           setConfirmPassword("");
-          onComplete?.();
+          onComplete();
         }
       }]
     );
     } 
-    catch (error) {
+    catch (error: any) {
       let errorMessage = "An error occurred while changing your password";
       
       // Handle specific Firebase error codes
