@@ -12,7 +12,35 @@ const Profile = () => {
   const user = auth().currentUser;
 
   const [profilePic, setProfilePic] = useState<string>(user?.photoURL || "https://via.placeholder.com/250" );
+
+  const [userDoc, setUserDoc] = useState<any>(null);
+
   const [showPasswordForm, setShowPasswordForm] = useState(false);
+
+  useEffect(() => {
+    const fetchUserDoc = async () => {
+      const uid = user?.uid;
+      if (!uid) {
+        return;
+      }
+
+      try {
+        const userDocRef = firestore().collection("users").doc(uid);
+        const userDocSnap = await userDocRef.get();
+        if (!userDocSnap.exists) {
+          throw new Error("User document does not exist");
+        }
+        setUserDoc(userDocSnap.data());
+      } catch (error) {
+        console.error("Error fetching user document: ", error);
+        Alert.alert("Error", "Failed to fetch user document");
+      }
+    };
+
+    fetchUserDoc();
+  }, [user]);
+
+
 
   const requestPermission = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -68,7 +96,9 @@ const Profile = () => {
         <TouchableOpacity onPress={pickImage} className="bg-blue-500 px-4 py-3 rounded-lg my-2">
           <Text className="text-white"> Change Profile Picture </Text>
         </TouchableOpacity>
-        <Text>USER: {user?.email}</Text>
+        <Text> USER: {user?.email}</Text>
+        <Text> First name: {userDoc?.firstname} </Text>
+        <Text> Last name: {userDoc?.lastname} </Text>
         <TouchableOpacity onPress={() => auth().signOut()} className="bg-blue-500 px-4 py-3 rounded-lg my-2">
           <Text className="text-white"> Sign Out </Text>
         </TouchableOpacity>
@@ -90,34 +120,3 @@ const Profile = () => {
 
 export default Profile;
 
-// code for displaying user's name
-// missing code snippets to connect user account to firebase 'users' collection
-
-// const [showPasswordForm, setShowPasswordForm] = useState(false);
-
-  // const [firstname, setFirstName] = useState<string>("");
-  // const [lastname, setLastName] = useState<string>("");
-
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     if (!user?.uid) return; // must be logged in
-
-  //     try {
-  //       // get the specific user document using their UID
-  //       const userDoc = await firestore().collection("users").doc(user.uid).get();
-
-  //       if (userDoc.exists) {
-  //         const userData = userDoc.data();
-  //         setFirstName(userData?.firstname);
-  //         setLastName(userData?.lastname);
-  //       } 
-  //       else {
-  //         console.log("User Document does not exist.");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user data: ", error);
-  //     }
-  //   };
-
-  //   fetchUserData();
-  // }, [user?.uid]);

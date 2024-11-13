@@ -7,11 +7,25 @@ import {
   KeyboardAvoidingView,
   TextInput,
   ActivityIndicator,
+  Alert,
 } from "react-native";
 import { Link } from "expo-router";
 import auth from "@react-native-firebase/auth";
 import { FirebaseError } from "firebase/app";
 import Colors from "@/constants/Colors";
+import firestore from "@react-native-firebase/firestore";
+
+const createUserDocument = async (uid: string, email: string) => {
+  await firestore()
+        .collection("users")
+        .doc(uid)
+        .set({
+          email,
+          uid,
+          firstname: "FIRSTNAME",
+          lastname: "LASTNAME",
+        });
+}
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -21,11 +35,21 @@ const Signup = () => {
   const signUp = async () => {
     setLoading(true);
     try {
-      await auth().createUserWithEmailAndPassword(email, password);
-      alert("Check your email (setup email verification)!");
+      const response = await auth().createUserWithEmailAndPassword(email, password);
+
+      if (response.additionalUserInfo?.isNewUser) {
+        //Alert.alert("Success", "Check your email (setup email verification)!");
+        const uid = response.user.uid;
+        const email = response.user.email;
+        if (uid && email) {
+          await createUserDocument(uid, email);
+        }
+      } else {
+        Alert.alert("Info", "This account already exists.");
+      }
     } catch (e: any) {
       const err = e as FirebaseError;
-      alert("Registration failed: " + err.message);
+      Alert.alert("Registration failed", err.message);
     } finally {
       setLoading(false);
     }
