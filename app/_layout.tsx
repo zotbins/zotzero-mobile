@@ -5,6 +5,9 @@ import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import { View } from "react-native";
 import { ActivityIndicator } from "react-native";
 
+export let currentUser: FirebaseAuthTypes.User | null = null;
+export let currentUserUid: string | null = null;
+
 export default function RootLayout() {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>();
@@ -15,7 +18,9 @@ export default function RootLayout() {
     console.log("onAuthStateChanged", user);
     setUser(user);
     if (initializing) setInitializing(false);
-  };
+    currentUser = user; 
+    currentUserUid = user?.uid || null;
+  }; 
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);

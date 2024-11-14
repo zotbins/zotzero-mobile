@@ -1,30 +1,64 @@
-import React from "react";
-import { Text } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, StyleSheet, ScrollView } from "react-native";
 import Colors from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useRouter } from "expo-router";
+import { collection, query, orderBy, limit, getDocs, where } from "firebase/firestore";
+import { db } from "../../FirebaseConfig";
+import { currentUserUid } from "../_layout";
 
-const Leaderboard = () => {
-    const router = useRouter();
 
-    // leaderboard data with the current user (hardcoded for now, will be changed to grab data from firebase)
-    const leaderboardData = [
-        { rank: 1, name: "You", points: 1500 },
-        { rank: 2, name: "Test_User_1", points: 1400 },
-        { rank: 3, name: "Test_User_2", points: 1300 },
-        { rank: 4, name: "Test_User_3", points: 1200 },
-        { rank: 5, name: "Test_User_4", points: 1100 },
-        { rank: 6, name: "Test_User_5", points: 1000 },
-        { rank: 7, name: "Test_User_6", points: 900 },
-        { rank: 8, name: "Test_User_7", points: 800 },
-        { rank: 9, name: "Test_User_8", points: 700 },
-        { rank: 10, name: "Test_User_9", points: 600 },
-    ];
+    interface LeaderboardUser {
+        rank: number;
+        points: number;
+        username: string;
+    }
+      
+      const Leaderboard = () => {
+        const router = useRouter();
 
-    const currentUser = leaderboardData[0];
+        const [leaderboardData, setLeaderboardData] = useState<LeaderboardUser[]>([]);
+        const [userScore, setUserScore] = useState<number>(0);
+        const [userRank, setUserRank] = useState<number>(0);
+        useEffect(() => {
+          const fetchLeaderboard = async () => {
+            try {
+              const leaderboardQuery = query(
+                collection(db, "scores"),
+                orderBy("score", "desc"),
+              );
+
+              const querySnapshot = await getDocs(leaderboardQuery);
+              const leaderboard: LeaderboardUser[] = [];
+
+              querySnapshot.forEach((doc) => {
+                let name = doc.data().username;
+                if (doc.data().uid == currentUserUid) {
+                    setUserScore(doc.data().score);
+                    setUserRank(leaderboard.length + 1)
+                };
+                    leaderboard.push({
+                        rank: leaderboard.length + 1,
+                        username: name,
+                        points: doc.data().score,
+                      });
+              });
+              
+              setLeaderboardData(leaderboard.slice(0,10));
+              
+
+            } catch (error) {
+              console.error("Error fetching leaderboard data: ", error);
+            }
+          };
+      
+          fetchLeaderboard();
+        }, []); 
+
+    const currentUser = { rank: userRank, username: "You", points: userScore};
 
     return (
-        <>
+        <ScrollView contentContainerStyle={styles.container}>
             <Stack.Screen
                 options={{
                     headerShadowVisible: false,
@@ -40,18 +74,50 @@ const Leaderboard = () => {
                     headerTitle: "",
                 }}
             />
-            <Text>Leaderboard</Text>
-            <Text>
-                Rank {currentUser.rank} - {currentUser.name} - {currentUser.points} Points
+            <Text style={styles.userRank}>
+                Rank {currentUser.rank} - {currentUser.username} - {currentUser.points} Points
             </Text>
-            <Text>All Rankings</Text>
+            <Text style={styles.subheading}>All Rankings</Text>
             {leaderboardData.map((user) => (
-                <Text key={user.rank}>
-                    Rank {user.rank} - {user.name} - {user.points} Points
-                </Text>
+                user.rank == userRank ? <Text style={styles.userRank} key={user.rank}>
+                Rank {userRank} - {"You"} - {userScore} Points
+            </Text> :  <Text style={styles.rankText} key={user.rank}>
+            Rank {user.rank} - {user.username} - {user.points} Points
+        </Text>
+
             ))}
-        </>
+        </ScrollView>
     );
 };
 
+const styles = StyleSheet.create({
+    container: {
+      flexGrow: 1,
+      alignItems: "center",
+      padding: 20,
+    },
+    heading: {
+      fontSize: 32,
+      fontWeight: "bold",
+      marginBottom: 20,
+    },
+    subheading: {
+      fontSize: 24,
+      fontWeight: "600",
+      marginVertical: 10,
+    },
+    rankContainer: {
+      marginBottom: 15,
+    },
+    rankText: {
+      fontSize: 18,
+      color: Colors.black,
+      textAlign: "center",
+    },
+    userRank: {
+        fontSize: 18,
+        backgroundColor: Colors.tintColor,
+    },
+  });
+  
 export default Leaderboard;
