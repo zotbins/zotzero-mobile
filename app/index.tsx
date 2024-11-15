@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import React from "react";
 import Colors from "@/constants/Colors";
 import { Link } from "expo-router";
+import "../global.css"
 
 const Home = () => {
   return (

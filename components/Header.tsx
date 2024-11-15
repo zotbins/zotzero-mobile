@@ -2,8 +2,11 @@ import { Image, StyleSheet, View, Text } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "@/constants/Colors";
+import auth from "@react-native-firebase/auth";
 
 const Header = () => {
+  const user = auth().currentUser;
+  
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
       <View
@@ -24,7 +27,7 @@ const Header = () => {
           </Text>
           <Image
             source={{
-              uri: "https://images.pexels.com/photos/1500610/pexels-photo-1500610.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              uri: user?.photoURL || "https://via.placeholder.com/250",
             }}
             style={{ height: 50, width: 50, borderRadius: 50 }}
           />
