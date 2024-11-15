@@ -12,7 +12,7 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "../../FirebaseConfig";
-import currentUserUid from "../_layout";
+import { currentUserUid } from "../_layout";
 
 interface LeaderboardUser {
   rank: number;

@@ -44,6 +44,11 @@ const Home = () => {
             <Text style={styles.text}>Daily Quiz</Text>
           </Pressable>
         </Link>
+        <Link href="/leaderboard" asChild>
+          <Pressable style={styles.button}>
+            <Text style={styles.text}>Leaderboard</Text>
+          </Pressable>
+        </Link>
         <MapView
           style={styles.map}
           initialRegion={INITIAL_REGION}
@@ -94,5 +99,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 3,
     backgroundColor: Colors.tintColor,
+    marginBottom: 10,
   },
 });
