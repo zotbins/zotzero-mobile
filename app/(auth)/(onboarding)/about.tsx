@@ -1,20 +1,27 @@
 import React from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, Text, Image } from 'react-native';
+import {zotbinlogo} from "../../../assets/images/zotbins_logo.png";
+import {ucidining} from "../../../assets/images/uci_dining.jpeg";
 
 const About = () => {
   return (
-    <ScrollView className="flex-1 bg-gray-100 p-5">
-      <Text className="text-2xl font-bold text-center mb-4">About Us</Text>
-      <Text className="text-base leading-6 mb-4 text-justify">
+    <ScrollView contentContainerStyle={{flexGrow: 1, justifyContent: 'center', alignItems: 'center'}} className="bg-amber-50">
+      <Text className="text-4xl font-bold text-lime-900 mt-10 mb-5">About Zotbins</Text>
+      <Text className="text-2xl text-center text-lime-900 w-10/12 mb-5 leading-10">
       ZotBins is an innovative smart waste bin system designed to optimize waste management 
-      efficiency and promote sustainable practices. By collecting and analyzing data on waste 
-      diversion rates—specifically, the proportion of incorrectly placed trash items relative 
-      to the total waste volume (e.g. glass bottle in the trash bin instead of recycle bin)—we 
-      aim to enhance campus-wide waste management practices.
+      efficiency and promote sustainable practices.
       </Text>
-      <Text className="text-base leading-6 text-justify">
-        We are currently partnered with UCI Dining. Add more information.
+
+
+      <Image source={require('../../../assets/images/zotbins_logo.png')} className="w-36 h-56 my-2"></Image>
+
+      <Text className="text-4xl font-bold text-lime-900 mt-10 mb-5">Partners</Text>
+
+      <Text className="text-2xl text-center text-lime-900 w-3/4 mb-5 leading-10">
+      ZotBins is affiliated with UCI Dining and other organizations to help make the campus greener.
       </Text>
+
+      <Image source={require('../../../assets/images/uci_dining.jpeg')} className="w-36 h-36 my-2"></Image>
     </ScrollView>
   );
 };
