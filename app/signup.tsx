@@ -28,6 +28,8 @@ const createUserDocument = async (uid: string, email: string) => {
 }
 
 const Signup = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -58,6 +60,18 @@ const Signup = () => {
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView behavior="padding">
+        <TextInput
+          style={styles.input}
+          value={firstName}
+          onChangeText={setFirstName}
+          placeholder="First Name"
+        />
+        <TextInput
+          style={styles.input}
+          value={lastName}
+          onChangeText={setLastName}
+          placeholder="Last Name"
+        />
         <TextInput
           style={styles.input}
           value={email}
