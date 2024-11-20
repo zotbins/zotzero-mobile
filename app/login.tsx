@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   TextInput,
   ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
 import { Link } from "expo-router";
 import auth from "@react-native-firebase/auth";
@@ -65,6 +66,16 @@ const Login = () => {
           </>
         )}
       </KeyboardAvoidingView>
+      <View className="absolute bottom-12 left-8 z-10">
+        <Link href="/feature-1">
+          <View
+            className="w-12 h-12 rounded-full flex items-center justify-center"
+            style={{ backgroundColor:Colors.tintColor}}
+          >
+            <Text className="text-white text-3xl">?</Text>
+          </View>
+        </Link>
+      </View>
     </View>
   );
 };
