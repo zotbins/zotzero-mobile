@@ -13,16 +13,18 @@ const scannerFeature = () => {
   };
 
   return (
-    <View className="flex-1 bg-white px-5 py-12 justify-center items-center">
+    <View className="flex-1 px-5 py-12 justify-center items-center bg-amber-50">
+      <Text className="text-4xl font-bold text-lime-900 mx-10">Scanner Feature</Text>
+        
       <Image
-        source={require("../../../assets/images/scanner-demo.png")}
-        className="w-full h-auto max-w-md max-h-96 object-contain mb-5"
+        source={require("../../../assets/images/scanner_icon.png")}
+        className="w-64 h-64 my-10"
       />
-      <Text className="text-center mb-5">
+      <Text className="text-2xl text-center text-lime-900 w-10/12 mx-8 leading-10">
         Our app contains a scanner for easy waste detection! Click on the
         scanner icon to scan your trash.
       </Text>
-      <DotIndicator currentPage={2} totalPages={totalPages} />
+      {/* <DotIndicator currentPage={2} totalPages={totalPages} />
       <View className="flex-row justify-center items-center mt-5">
         <TouchableOpacity
           className="rounded-lg px-6 py-3 flex items-center justify-center"
@@ -31,7 +33,7 @@ const scannerFeature = () => {
         >
           <Text className="text-white">{'Next'}</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 };

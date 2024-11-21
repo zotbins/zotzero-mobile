@@ -11,8 +11,8 @@ const End = () => {
   };
 
   return (
-    <View className="flex-1 bg-white px-5 py-12 justify-center items-center">
-      <Text className="text-black text-3xl mb-5 text-center">
+    <View className="flex-1 px-5 justify-center items-center bg-amber-50">
+      <Text className="text-4xl font-bold text-lime-900 text-center mb-5">
         Get Started with Sustainability today!
       </Text>
       <TouchableOpacity
