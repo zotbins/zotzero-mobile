@@ -1,9 +1,16 @@
-import { View, Text, StyleSheet, Pressable, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import React, { useState } from "react";
-import { useRouter } from 'expo-router';
+import { useRouter } from "expo-router";
 import Colors from "@/constants/Colors";
 
-const End = () => {
+const OnboardingEnd = () => {
   const router = useRouter();
 
   const handleSignUp = () => {
@@ -11,7 +18,7 @@ const End = () => {
   };
 
   return (
-    <View className="flex-1 px-5 justify-center items-center bg-amber-50">
+    <View className="flex-1 px-5 justify-center items-center bg-amber-50 ">
       <Text className="text-4xl font-bold text-lime-900 text-center mb-5">
         Get Started with Sustainability today!
       </Text>
@@ -26,4 +33,4 @@ const End = () => {
   );
 };
 
-export default End;
+export default OnboardingEnd;

@@ -1,5 +1,5 @@
 import { Stack, useRouter, useSegments } from "expo-router";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "react-native-reanimated";
 import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import { View } from "react-native";
@@ -18,9 +18,9 @@ export default function RootLayout() {
     console.log("onAuthStateChanged", user);
     setUser(user);
     if (initializing) setInitializing(false);
-    currentUser = user; 
+    currentUser = user;
     currentUserUid = user?.uid || null;
-  }; 
+  };
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
@@ -34,7 +34,6 @@ export default function RootLayout() {
 
     if (user && !inAuthGroup) {
       router.replace("/(auth)/(tabs)/home");
-      // router.replace("/(auth)/(onboarding)/about");
     } else if (!user && inAuthGroup) {
       router.replace("/login");
     }
@@ -56,10 +55,9 @@ export default function RootLayout() {
   return (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
-      {/* <Stack.Screen name="feature-1" options={{ headerShown: false }} /> */}
-      {/* <Stack.Screen name="end" options={{ headerShown: false }} /> */}
       <Stack.Screen name="login" options={{ headerShown: false }} />
-      {/* <Stack.Screen name="signup" options={{ headerShown: false }} /> */}
+      <Stack.Screen name="signup" options={{ headerShown: false }} />
+      <Stack.Screen name="onboarding" options={{ headerShown: false }} />
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
     </Stack>
   );

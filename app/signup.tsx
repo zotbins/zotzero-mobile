@@ -9,45 +9,66 @@ import {
   ActivityIndicator,
   Alert,
 } from "react-native";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import auth from "@react-native-firebase/auth";
 import { FirebaseError } from "firebase/app";
 import Colors from "@/constants/Colors";
 import firestore from "@react-native-firebase/firestore";
 
-const createUserDocument = async (uid: string, email: string) => {
-  await firestore()
-        .collection("users")
-        .doc(uid)
-        .set({
-          email,
-          uid,
-          firstname: "FIRSTNAME",
-          lastname: "LASTNAME",
-        });
-}
+const createUserDocument = async (
+  uid: string,
+  email: string,
+  firstname: string,
+  lastname: string
+) => {
+  await firestore().collection("users").doc(uid).set({
+    email,
+    uid,
+    firstname,
+    lastname,
+  });
+};
 
 const Signup = () => {
+  const router = useRouter();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // should be more robust in the future
+  const validatePassword = () => {
+    if (password !== confirmPassword) {
+      Alert.alert("Error", "New passwords don't match");
+      return false;
+    } else if (password.length < 6 || confirmPassword.length < 6) {
+      Alert.alert("Error", "New password must be at least 6 characters long");
+      return false;
+    } else {
+      return true;
+    }
+  };
 
   const signUp = async () => {
     setLoading(true);
     try {
-      const response = await auth().createUserWithEmailAndPassword(email, password);
+      if (validatePassword()) {
+        const response = await auth().createUserWithEmailAndPassword(
+          email,
+          password
+        );
 
-      if (response.additionalUserInfo?.isNewUser) {
-        //Alert.alert("Success", "Check your email (setup email verification)!");
-        const uid = response.user.uid;
-        const email = response.user.email;
-        if (uid && email) {
-          await createUserDocument(uid, email);
+        if (response.additionalUserInfo?.isNewUser) {
+          const uid = response.user.uid;
+          const email = response.user.email;
+          if (uid && email) {
+            await createUserDocument(uid, email, firstName, lastName);
+          }
+        } else {
+          Alert.alert("Info", "This account already exists.");
         }
-      } else {
-        Alert.alert("Info", "This account already exists.");
       }
     } catch (e: any) {
       const err = e as FirebaseError;
@@ -87,6 +108,13 @@ const Signup = () => {
           secureTextEntry
           placeholder="Password"
         />
+        <TextInput
+          style={styles.input}
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+          secureTextEntry
+          placeholder="Confirm Password"
+        />
         {loading ? (
           <ActivityIndicator size={"small"} style={{ margin: 28 }} />
         ) : (
@@ -104,6 +132,14 @@ const Signup = () => {
           </>
         )}
       </KeyboardAvoidingView>
+      <View className="absolute bottom-12 left-5 z-10">
+        <Pressable
+          className="bg-tintColor w-12 h-12 rounded-full justify-center items-center"
+          onPress={() => router.push("/onboarding")}
+        >
+          <Text className="text-white text-3xl">?</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };

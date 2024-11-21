@@ -12,9 +12,12 @@ import {
 import { Link } from "expo-router";
 import auth from "@react-native-firebase/auth";
 import { FirebaseError } from "firebase/app";
+import { useRouter } from "expo-router";
 import Colors from "@/constants/Colors";
 
 const Login = () => {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -66,6 +69,14 @@ const Login = () => {
           </>
         )}
       </KeyboardAvoidingView>
+      <View className="absolute bottom-12 left-5 z-10">
+        <Pressable
+          className="bg-tintColor w-12 h-12 rounded-full justify-center items-center"
+          onPress={() => router.push("/onboarding")}
+        >
+          <Text className="text-white text-3xl">?</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
