@@ -1,6 +1,6 @@
 import React from "react";
 import { Stack, useRouter, useSegments } from "expo-router";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "react-native-reanimated";
 import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import { View } from "react-native";
@@ -19,9 +19,9 @@ export default function RootLayout() {
     console.log("onAuthStateChanged", user);
     setUser(user);
     if (initializing) setInitializing(false);
-    currentUser = user; 
+    currentUser = user;
     currentUserUid = user?.uid || null;
-  }; 
+  };
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
@@ -58,6 +58,7 @@ export default function RootLayout() {
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="login" options={{ headerShown: false }} />
       <Stack.Screen name="signup" options={{ headerShown: false }} />
+      <Stack.Screen name="onboarding" options={{ headerShown: false }} />
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
     </Stack>
   );
