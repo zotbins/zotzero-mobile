@@ -9,7 +9,7 @@ const Scan = () => {
     <>
       <Stack.Screen options={{ headerShown: false }} />
       <SafeAreaView className="flex-1 bg-white items-center justify-center">
-        <TouchableOpacity className="bg-blue-500 px-5 py-4 rounded-lg" onPress={()=> {router.push("/(auth)/camera")}}>
+        <TouchableOpacity className="bg-blue px-5 py-4 rounded-lg" onPress={()=> {router.push("/(auth)/camera")}}>
           <Text className="text-white">Scan Food Waste</Text>
         </TouchableOpacity>
       </SafeAreaView>

@@ -1,4 +1,3 @@
-import React from "react";
 import { Stack, useRouter, useSegments } from "expo-router";
 import React, { useEffect, useState } from "react";
 import "react-native-reanimated";
