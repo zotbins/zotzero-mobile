@@ -3,15 +3,7 @@ import { Text, StyleSheet, ScrollView } from "react-native";
 import Colors from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useRouter } from "expo-router";
-import {
-  collection,
-  query,
-  orderBy,
-  limit,
-  getDocs,
-  where,
-} from "firebase/firestore";
-import { db } from "../../FirebaseConfig";
+import firestore from "@react-native-firebase/firestore";
 import { currentUserUid } from "../_layout";
 
 interface LeaderboardUser {
@@ -29,12 +21,11 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const leaderboardQuery = query(
-          collection(db, "scores"),
-          orderBy("score", "desc")
-        );
+        const leaderboardQuery = firestore()
+          .collection('scores')
+          .orderBy('score', 'desc');
 
-        const querySnapshot = await getDocs(leaderboardQuery);
+        const querySnapshot = await leaderboardQuery.get();
         const leaderboard: LeaderboardUser[] = [];
 
         querySnapshot.forEach((doc) => {
