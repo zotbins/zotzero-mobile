@@ -1,6 +1,7 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 interface ScanResultsProps {
   image: string | null; 
@@ -18,6 +19,9 @@ const ScanResults: React.FC<ScanResultsProps> = ({ image, setImage }) => {
         {image && <Image source={{ uri: image }} className="w-72 h-72"/>}
         <Text className="text-white text-3xl py-2">This is a water bottle!</Text>
       </View>
+      <TouchableOpacity className="bg-blue-500 px-5 py-4 m-5 rounded-lg" onPress={() => router.back()}>
+        <Text className="text-white">Back to Home</Text>
+      </TouchableOpacity>
     </View>
   )
 }
