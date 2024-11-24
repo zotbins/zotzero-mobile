@@ -15,6 +15,7 @@ import MapView, {
   PROVIDER_GOOGLE,
   PROVIDER_DEFAULT,
 } from "react-native-maps";
+import Map from "@/components/ZotBinsMap.js";
 import { markers } from "../../../assets/markers.js";
 
 const INITIAL_REGION = {
@@ -49,7 +50,12 @@ const Home = () => {
             <Text style={styles.text}>Leaderboard</Text>
           </Pressable>
         </Link>
-        <MapView
+        <Link href="/map" asChild>
+          <Pressable style={styles.button}>
+            <Text style={styles.text}>Map</Text>
+          </Pressable>
+        </Link>
+        {/* <MapView
           style={styles.map}
           initialRegion={INITIAL_REGION}
           showsUserLocation
@@ -66,7 +72,7 @@ const Home = () => {
               onPress={() => onMarkerSelected(marker)}
             />
           ))}
-        </MapView>
+        </MapView> */}
       </View>
     </>
   );
