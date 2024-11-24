@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import Mapbox, {
   Camera,
   LocationPuck,
   MapView,
   PointAnnotation,
+  ShapeSource,
 } from "@rnmapbox/maps";
 import { View, Image } from "react-native";
 import { markers } from "../assets/markers.js";
@@ -13,6 +14,8 @@ Mapbox.setAccessToken(process.env.EXPO_PUBLIC_MAPBOXACCESSTOKEN as string);
 Mapbox.setTelemetryEnabled(false);
 
 const ZotBinsMap = () => {
+  // make type more specific instead of "any"
+  const markerRefs: { [key: string]: any } = useRef({});
   return (
     <View className="w-full h-full">
       <MapView
@@ -35,19 +38,22 @@ const ZotBinsMap = () => {
           puckBearing="heading"
           pulsing={{ isEnabled: true }}
         />
+
+        {/* <ShapeSource id="zotbins" shape={} */}
+
         {markers.map((marker) => (
           <PointAnnotation
+            ref={(ref) => (markerRefs.current[marker.name] = ref)}
             key={marker.name}
             id={marker.name}
             coordinate={[marker.longitude, marker.latitude]}
-            ref={(ref) => (this.markerRef = ref)}
             onSelected={() => alert(marker.name + " Bin Selected!")}
           >
             <Image
               source={ZotBinsLogo}
               resizeMode="contain"
               className="h-12 w-12"
-              onLoad={() => this.markerRef.refresh()}
+              onLoad={() => markerRefs.current[marker.name]?.refresh()}
             />
           </PointAnnotation>
         ))}
