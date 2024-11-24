@@ -1,5 +1,10 @@
 import React from "react";
-import Mapbox, { Camera, MapView, PointAnnotation } from "@rnmapbox/maps";
+import Mapbox, {
+  Camera,
+  LocationPuck,
+  MapView,
+  PointAnnotation,
+} from "@rnmapbox/maps";
 import { View, Image } from "react-native";
 import { markers } from "../assets/markers.js";
 import ZotBinsLogo from "../assets/images/zotbins_logo.png";
@@ -23,6 +28,12 @@ const ZotBinsMap = () => {
           pitch={0}
           animationMode={"flyTo"}
           animationDuration={500}
+        />
+
+        <LocationPuck
+          puckBearingEnabled
+          puckBearing="heading"
+          pulsing={{ isEnabled: true }}
         />
         {markers.map((marker) => (
           <PointAnnotation
