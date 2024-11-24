@@ -6,7 +6,7 @@ import OnboardingScanner from "../components/Onboarding/OnboardingScannerFeature
 import OnboardingEnd from "../components/Onboarding/OnboardingEnd";
 import DotIndicator from "@/components/DotIndicator";
 
-export default function Layout() {
+export default function Onboarding() {
   const [currentOffset, setCurrentOffset] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   return (

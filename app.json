@@ -40,6 +40,12 @@
           }
         }
       ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Show current location on map."
+        }
+      ],
       "@react-native-firebase/app",
       "@react-native-firebase/auth"
     ],

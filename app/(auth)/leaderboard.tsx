@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Stack, useRouter } from "expo-router";
 import firestore from "@react-native-firebase/firestore";
 import { currentUserUid } from "../_layout";
+import BackButton from "@/components/BackButton";
 
 interface LeaderboardUser {
   rank: number;
@@ -22,8 +23,8 @@ const Leaderboard = () => {
     const fetchLeaderboard = async () => {
       try {
         const leaderboardQuery = firestore()
-          .collection('scores')
-          .orderBy('score', 'desc');
+          .collection("scores")
+          .orderBy("score", "desc");
 
         const querySnapshot = await leaderboardQuery.get();
         const leaderboard: LeaderboardUser[] = [];
@@ -53,19 +54,13 @@ const Leaderboard = () => {
   const currentUser = { rank: userRank, username: "You", points: userScore };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView className="pt-24" contentContainerStyle={styles.container}>
       <Stack.Screen
         options={{
           headerShadowVisible: false,
           headerBackVisible: false,
-          headerLeft: () => (
-            <Ionicons
-              name="chevron-back"
-              size={24}
-              color={Colors.black}
-              onPress={() => router.back()}
-            />
-          ),
+          headerTransparent: true,
+          headerLeft: () => <BackButton />,
           headerTitle: "",
         }}
       />
