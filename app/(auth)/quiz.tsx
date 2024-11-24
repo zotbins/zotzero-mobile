@@ -1,16 +1,9 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  StatusBar,
-  Animated,
-} from "react-native";
+import { View, Text, StyleSheet, Pressable, Animated } from "react-native";
 import React, { useState } from "react";
 import Colors from "@/constants/Colors";
 import { Link, Stack, useRouter } from "expo-router";
 import data from "../../data/QuizData.js";
-import { Ionicons } from "@expo/vector-icons";
+import BackButton from "@/components/BackButton";
 
 const Quiz = () => {
   const router = useRouter();
@@ -175,18 +168,12 @@ const Quiz = () => {
         options={{
           headerShadowVisible: false,
           headerBackVisible: false,
-          headerLeft: () => (
-            <Ionicons
-              name="chevron-back"
-              size={24}
-              color={Colors.black}
-              onPress={() => router.back()}
-            />
-          ),
+          headerTransparent: true,
+          headerLeft: () => <BackButton />,
           headerTitle: "",
         }}
       />
-      <View style={styles.container}>
+      <View className="pt-32" style={styles.container}>
         {!showResults && displayProgress()}
         {!showResults && displayQuestion()}
         {!showResults && displayOptions()}

@@ -2,11 +2,12 @@ import { Image, StyleSheet, View, Text } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "@/constants/Colors";
+import ZotBinsLogo from "../assets/images/zotbins_logo.png";
 import auth from "@react-native-firebase/auth";
 
 const Header = () => {
   const user = auth().currentUser;
-  
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
       <View
@@ -18,12 +19,17 @@ const Header = () => {
           paddingHorizontal: 20,
         }}
       >
-        <Text style={{ fontWeight: "bold", color: Colors.black, fontSize: 16 }}>
+        {/* <Text style={{ fontWeight: "bold", color: Colors.black, fontSize: 16 }}>
           ZotZero
-        </Text>
+        </Text> */}
+        <Image
+          source={ZotBinsLogo}
+          resizeMode="contain"
+          className="h-10 w-10"
+        />
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Text style={{ marginRight: 10, color: "#fc8803", fontSize: 14 }}>
-            4
+            21
           </Text>
           <Image
             source={{

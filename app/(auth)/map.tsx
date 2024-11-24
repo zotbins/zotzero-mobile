@@ -1,9 +1,8 @@
 import React from "react";
 import ZotBinsMap from "@/components/ZotBinsMap";
 import { View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { Stack, router } from "expo-router";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import { Stack } from "expo-router";
+import BackButton from "@/components/BackButton";
 
 const Map = () => {
   return (
@@ -12,14 +11,8 @@ const Map = () => {
         options={{
           headerShadowVisible: false,
           headerBackVisible: false,
-          headerLeft: () => (
-            <Ionicons
-              name="chevron-back"
-              size={24}
-              color={Colors.black}
-              onPress={() => router.back()}
-            />
-          ),
+          headerTransparent: true,
+          headerLeft: () => <BackButton />,
           headerTitle: "",
         }}
       />
