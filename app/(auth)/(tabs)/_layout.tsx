@@ -8,7 +8,7 @@ import { StatusBar } from "expo-status-bar";
 export default function Layout() {
   return (
     <>
-      <Tabs
+      <Tabs 
         screenOptions={{
           tabBarStyle: {
             backgroundColor: Colors.white,
@@ -35,11 +35,7 @@ export default function Layout() {
           options={{
             tabBarIcon: ({ color, size, focused }) => (
               <View
-                style={{
-                  padding: 12,
-                  borderRadius: 30,
-                  backgroundColor: focused ? Colors.tintColor : Colors.white,
-                }}
+              className={`p-3 rounded-[30px] ${focused ? "bg-tintColor" : "bg-white"}`}
               >
                 <AntDesign name="home" size={18} color={color} />
               </View>
@@ -51,11 +47,7 @@ export default function Layout() {
           options={{
             tabBarIcon: ({ color, size, focused }) => (
               <View
-                style={{
-                  padding: 12,
-                  borderRadius: 30,
-                  backgroundColor: focused ? Colors.tintColor : Colors.white,
-                }}
+              className={`p-3 rounded-[30px] ${focused ? "bg-tintColor" : "bg-white"}`}
               >
                 <AntDesign name="scan1" size={18} color={color} />
               </View>
@@ -67,11 +59,7 @@ export default function Layout() {
           options={{
             tabBarIcon: ({ color, size, focused }) => (
               <View
-                style={{
-                  padding: 12,
-                  borderRadius: 30,
-                  backgroundColor: focused ? Colors.tintColor : Colors.white,
-                }}
+              className={`p-3 rounded-[30px] ${focused ? "bg-tintColor" : "bg-white"}`}
               >
                 <AntDesign name="user" size={18} color={color} />
               </View>

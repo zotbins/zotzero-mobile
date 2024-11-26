@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, StyleSheet, ScrollView } from "react-native";
+import { Text, StyleSheet, ScrollView, View } from "react-native";
 import Colors from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useRouter } from "expo-router";
@@ -54,7 +54,7 @@ const Leaderboard = () => {
   const currentUser = { rank: userRank, username: "You", points: userScore };
 
   return (
-    <ScrollView className="pt-24" contentContainerStyle={styles.container}>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="pt-24 bg-white">
       <Stack.Screen
         options={{
           headerShadowVisible: false,
@@ -64,54 +64,26 @@ const Leaderboard = () => {
           headerTitle: "",
         }}
       />
-      <Text style={styles.userRank}>
+      <View className="flex flex-col items-center p-4">
+      <Text className="text-xl bg-white p-2 mb-4">
         Rank {currentUser.rank} - {currentUser.username} - {currentUser.points}{" "}
         Points
       </Text>
-      <Text style={styles.subheading}>All Rankings</Text>
+      <Text className="text-2xl font-semibold mb-2">All Rankings</Text>
       {leaderboardData.map((user) =>
         user.rank == userRank ? (
-          <Text style={styles.userRank} key={user.rank}>
+          <Text className="text-lg text-center mb-2 bg-tintColor" key={user.rank}>
             Rank {userRank} - {"You"} - {userScore} Points
           </Text>
         ) : (
-          <Text style={styles.rankText} key={user.rank}>
+          <Text className="text-lg text-center mb-2 text-black" key={user.rank}>
             Rank {user.rank} - {user.username} - {user.points} Points
           </Text>
         )
       )}
+      </View>
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    alignItems: "center",
-    padding: 20,
-  },
-  heading: {
-    fontSize: 32,
-    fontWeight: "bold",
-    marginBottom: 20,
-  },
-  subheading: {
-    fontSize: 24,
-    fontWeight: "600",
-    marginVertical: 10,
-  },
-  rankContainer: {
-    marginBottom: 15,
-  },
-  rankText: {
-    fontSize: 18,
-    color: Colors.black,
-    textAlign: "center",
-  },
-  userRank: {
-    fontSize: 18,
-    backgroundColor: Colors.tintColor,
-  },
-});
 
 export default Leaderboard;
