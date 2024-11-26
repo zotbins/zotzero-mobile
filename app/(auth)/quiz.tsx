@@ -23,25 +23,9 @@ const Quiz = () => {
 
   const displayProgress = () => {
     return (
-      <View
-        style={{
-          width: "100%",
-          height: 20,
-          borderRadius: 20,
-          backgroundColor: "#00000020",
-        }}
-      >
-        <Animated.View
-          style={[
-            {
-              height: 20,
-              borderRadius: 20,
-              backgroundColor: Colors.tintColor,
-            },
-            {
-              width: progressAnim,
-            },
-          ]}
+      <View className="w-full h-5 rounded-[20px] bg-black/20">
+        <Animated.View className="h-5 rounded-[20px] bg-tintColor"
+          style={{ width: progressAnim }}
         ></Animated.View>
       </View>
     );
@@ -55,21 +39,18 @@ const Quiz = () => {
     }).start();
 
     return (
-      <View style={{ paddingTop: 30, paddingBottom: 20 }}>
+      <View className="pt-8 pb-5">
         <View
-          style={{
-            flexDirection: "row",
-            alignItems: "flex-end",
-          }}
+          className="flex-row items-end"
         >
-          <Text style={{ color: Colors.black, fontSize: 20 }}>
+          <Text className="text-black text-2xl">
             {currentQuestionIndex + 1}{" "}
           </Text>
-          <Text style={{ color: Colors.black, fontSize: 20 }}>
+          <Text className="text-black text-2xl">
             / {questions.length}
           </Text>
         </View>
-        <Text style={{ color: Colors.black, fontSize: 30 }}>
+        <Text className="text-black text-4xl">
           {questions[currentQuestionIndex]?.question}
         </Text>
       </View>
@@ -83,25 +64,14 @@ const Quiz = () => {
           <Pressable
             key={option}
             disabled={isOptionsDisabled}
-            style={{
-              backgroundColor:
-                option == answer
-                  ? Colors.tintColor
-                  : option == currentSelected
-                  ? Colors.red
-                  : Colors.blue,
-              height: 100,
-
-              borderRadius: 10,
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              paddingHorizontal: 20,
-              marginVertical: 10,
-            }}
+            className={`h-24 rounded-[10px] flex-row items-center justify-between px-5 my-3 
+              ${option == answer ? "bg-tintColor"
+              : option == currentSelected
+              ? "bg-red"
+              : "bg-blue" }`}
             onPress={() => checkAnswer(option)}
           >
-            <Text style={{ fontSize: 20, color: Colors.white }}>{option}</Text>
+            <Text className="text-xl text-white">{option}</Text>
           </Pressable>
         ))}
       </View>
@@ -123,22 +93,11 @@ const Quiz = () => {
       return (
         <Pressable
           onPress={handleNext}
-          style={{
-            width: "100%",
-            borderColor: Colors.grey,
-            borderWidth: 2,
-            backgroundColor: Colors.white,
-            paddingHorizontal: 20,
-            marginVertical: 10,
-            height: 60,
-            borderRadius: 10,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          className="w-full border-2 border-grey bg-white px-5 my-2.5 h-16 rounded-[10px] 
+            flex-row items-center justify-center"
         >
           <Text
-            style={{ fontSize: 20, color: Colors.black, textAlign: "center" }}
+            className="text-2xl text-black text-center"
           >
             {currentQuestionIndex == questions.length - 1
               ? "Show Results"
@@ -173,7 +132,7 @@ const Quiz = () => {
           headerTitle: "",
         }}
       />
-      <View className="pt-32" style={styles.container}>
+      <View className="pt-32 flex-1 bg-white px-5 py-12">
         {!showResults && displayProgress()}
         {!showResults && displayQuestion()}
         {!showResults && displayOptions()}
@@ -182,19 +141,19 @@ const Quiz = () => {
         {showResults && (
           <View>
             <Text
-              style={{ fontSize: 40, color: Colors.black, textAlign: "center" }}
+              className="text-5xl text-black text-center"
             >
               Results
             </Text>
             <Text
-              style={{ fontSize: 20, color: Colors.black, textAlign: "center" }}
+              className="text-2xl text-black text-center"
             >
               {score} / {questions.length}
             </Text>
-            <View style={{ paddingTop: 50 }}>
+            <View className="pt-12">
               <Link href="/home" asChild>
-                <Pressable style={styles.button}>
-                  <Text style={styles.text}>Back to Home</Text>
+                <Pressable className="items-center justify-center py-5 px-8 rounded-sm shadow-sm bg-tintColor">
+                  <Text className="text-black">Back to Home</Text>
                 </Pressable>
               </Link>
             </View>
@@ -206,24 +165,3 @@ const Quiz = () => {
 };
 
 export default Quiz;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.white,
-    paddingHorizontal: 20,
-    paddingVertical: 50,
-  },
-  text: {
-    color: Colors.black,
-  },
-  button: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 20,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    backgroundColor: Colors.tintColor,
-  },
-});
