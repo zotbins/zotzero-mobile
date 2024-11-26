@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Mapbox, {
   Camera,
   LocationPuck,
@@ -6,16 +6,26 @@ import Mapbox, {
   PointAnnotation,
   ShapeSource,
 } from "@rnmapbox/maps";
-import { View, Image } from "react-native";
+import { View, Image, Modal, Pressable } from "react-native";
 import { markers } from "../assets/markers.js";
 import ZotBinsLogo from "../assets/images/zotbins_logo.png";
+import BinStatusModal from "@/components/BinStatusModal";
 
 Mapbox.setAccessToken(process.env.EXPO_PUBLIC_MAPBOXACCESSTOKEN as string);
 Mapbox.setTelemetryEnabled(false);
 
 const ZotBinsMap = () => {
+  const [displayModal, setDisplayModal] = useState(false);
+  const [activeBinName, setActiveBinName] = useState("");
+
   // make type more specific instead of "any"
   const markerRefs: { [key: string]: any } = useRef({});
+
+  const closeModal = () => {
+    setDisplayModal(false);
+    setActiveBinName("");
+  };
+
   return (
     <View className="w-full h-full">
       <MapView
@@ -47,17 +57,25 @@ const ZotBinsMap = () => {
             key={marker.name}
             id={marker.name}
             coordinate={[marker.longitude, marker.latitude]}
-            onSelected={() => alert(marker.name + " Bin Selected!")}
+            onSelected={() => {
+              setDisplayModal(true);
+              setActiveBinName(marker.name);
+            }}
           >
             <Image
               source={ZotBinsLogo}
               resizeMode="contain"
-              className="h-12 w-12"
+              className={`h-12 w-12`}
               onLoad={() => markerRefs.current[marker.name]?.refresh()}
             />
           </PointAnnotation>
         ))}
       </MapView>
+      {displayModal && (
+        <View className="justify-center items-center">
+          <BinStatusModal name={activeBinName} closeModal={closeModal} />
+        </View>
+      )}
     </View>
   );
 };
