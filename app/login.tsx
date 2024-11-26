@@ -35,10 +35,10 @@ const Login = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1 justify-center mx-5">
       <KeyboardAvoidingView behavior="padding">
         <TextInput
-          style={styles.input}
+          className="my-1 h-14 border rounded-md p-2 bg-white"
           value={email}
           onChangeText={setEmail}
           autoCapitalize="none"
@@ -46,22 +46,22 @@ const Login = () => {
           placeholder="Email"
         />
         <TextInput
-          style={styles.input}
+          className="my-1 h-14 border rounded-md p-2 bg-white"
           value={password}
           onChangeText={setPassword}
           secureTextEntry
           placeholder="Password"
         />
         {loading ? (
-          <ActivityIndicator size={"small"} style={{ margin: 28 }} />
+          <ActivityIndicator size={"small"} className="my-7"/>
         ) : (
           <>
-            <Pressable style={styles.button} onPress={signIn}>
-              <Text style={styles.text}>Login</Text>
+            <Pressable onPress={signIn} className="items-center justify-center py-5 rounded-md bg-tintColor mt-2">
+              <Text className="text-white">Login</Text>
             </Pressable>
-            <View style={styles.link}>
+            <View className="items-center justify-center pt-2">
               <Link href="/signup">
-                <Text style={{ color: Colors.blue }}>
+                <Text className="text-blue">
                   I don't have an account
                 </Text>
               </Link>
@@ -82,38 +82,3 @@ const Login = () => {
 };
 
 export default Login;
-
-const styles = StyleSheet.create({
-  container: {
-    marginHorizontal: 20,
-    flex: 1,
-    justifyContent: "center",
-  },
-  input: {
-    marginVertical: 4,
-    height: 50,
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: 10,
-    backgroundColor: "#fff",
-  },
-  text: {
-    color: Colors.white,
-    fontSize: 16,
-  },
-  link: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingTop: 10,
-  },
-  button: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 20,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    backgroundColor: Colors.tintColor,
-    marginTop: 5,
-  },
-});
