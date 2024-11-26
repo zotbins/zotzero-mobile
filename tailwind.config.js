@@ -8,6 +8,7 @@ module.exports = {
       white: "#FCFCFC",
       tintColor: "#79b880",
       blue: "#66aec4",
+      red: "#fc6565",
     },
     extend: {},
   },
