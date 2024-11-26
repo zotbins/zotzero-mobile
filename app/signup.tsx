@@ -29,6 +29,11 @@ const createUserDocument = async (
   });
 };
 
+const isSecure = (password: string) => {
+  const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})");
+  return passwordRegex.test(password);
+}
+
 const Signup = () => {
   const router = useRouter();
   const [firstName, setFirstName] = useState("");
@@ -45,6 +50,9 @@ const Signup = () => {
       return false;
     } else if (password.length < 6 || confirmPassword.length < 6) {
       Alert.alert("Error", "New password must be at least 6 characters long");
+      return false;
+    } else if (!isSecure(password)) {
+      Alert.alert("Error", "New password must contain at least one uppercase letter, one lowercase letter, and one number");
       return false;
     } else {
       return true;
