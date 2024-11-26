@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Text, StyleSheet, ScrollView, View } from "react-native";
-import Colors from "@/constants/Colors";
-import { Ionicons } from "@expo/vector-icons";
-import { Stack, useRouter } from "expo-router";
-import firestore from "@react-native-firebase/firestore";
-import { currentUserUid } from "../_layout";
 import BackButton from "@/components/BackButton";
+import firestore from "@react-native-firebase/firestore";
+import { Stack, useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { ScrollView, Text, View } from "react-native";
+import { currentUserUid } from "../_layout";
 
 interface LeaderboardUser {
   rank: number;
@@ -54,7 +52,10 @@ const Leaderboard = () => {
   const currentUser = { rank: userRank, username: "You", points: userScore };
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="pt-24 bg-white">
+    <ScrollView
+      contentContainerStyle={{ flexGrow: 1 }}
+      className="pt-24 bg-white"
+    >
       <Stack.Screen
         options={{
           headerShadowVisible: false,
@@ -65,22 +66,28 @@ const Leaderboard = () => {
         }}
       />
       <View className="flex flex-col items-center p-4">
-      <Text className="text-xl bg-white p-2 mb-4">
-        Rank {currentUser.rank} - {currentUser.username} - {currentUser.points}{" "}
-        Points
-      </Text>
-      <Text className="text-2xl font-semibold mb-2">All Rankings</Text>
-      {leaderboardData.map((user) =>
-        user.rank == userRank ? (
-          <Text className="text-lg text-center mb-2 bg-tintColor" key={user.rank}>
-            Rank {userRank} - {"You"} - {userScore} Points
-          </Text>
-        ) : (
-          <Text className="text-lg text-center mb-2 text-black" key={user.rank}>
-            Rank {user.rank} - {user.username} - {user.points} Points
-          </Text>
-        )
-      )}
+        <Text className="text-xl bg-white p-2 mb-4">
+          Rank {currentUser.rank} - {currentUser.username} -{" "}
+          {currentUser.points} Points
+        </Text>
+        <Text className="text-2xl font-semibold mb-2">All Rankings</Text>
+        {leaderboardData.map((user) =>
+          user.rank == userRank ? (
+            <Text
+              className="text-lg text-center mb-2 bg-tintColor"
+              key={user.rank}
+            >
+              Rank {userRank} - {"You"} - {userScore} Points
+            </Text>
+          ) : (
+            <Text
+              className="text-lg text-center mb-2 text-black"
+              key={user.rank}
+            >
+              Rank {user.rank} - {user.username} - {user.points} Points
+            </Text>
+          )
+        )}
       </View>
     </ScrollView>
   );

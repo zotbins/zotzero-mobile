@@ -1,22 +1,11 @@
-import {
-  View,
-  Text,
-  Button,
-  Image,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
-import React, { useState, useEffect } from "react";
-import Colors from "@/constants/Colors";
-import { Stack } from "expo-router";
+import PasswordChange from "@/components/PasswordChange";
 import auth from "@react-native-firebase/auth";
+import firestore from "@react-native-firebase/firestore";
 import storage from "@react-native-firebase/storage";
 import * as ImagePicker from "expo-image-picker";
-import firestore, {
-  collection,
-  getDocs,
-} from "@react-native-firebase/firestore";
-import PasswordChange from "@/components/PasswordChange";
+import { Stack } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { Alert, Image, Text, TouchableOpacity, View } from "react-native";
 
 const Profile = () => {
   const user = auth().currentUser;

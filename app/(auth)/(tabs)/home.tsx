@@ -1,10 +1,4 @@
-import {
-  Platform,
-  View,
-  Text,
-  Pressable,
-  Alert,
-} from "react-native";
+import { View, Text, Pressable } from "react-native";
 import React from "react";
 import { Link, Stack } from "expo-router";
 import Header from "@/components/Header";

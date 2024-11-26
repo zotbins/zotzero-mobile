@@ -1,19 +1,17 @@
+import auth from "@react-native-firebase/auth";
+import firestore from "@react-native-firebase/firestore";
+import { Link, useRouter } from "expo-router";
+import { FirebaseError } from "firebase/app";
 import React, { useState } from "react";
 import {
-  Text,
-  View,
-  Pressable,
-  StyleSheet,
-  KeyboardAvoidingView,
-  TextInput,
   ActivityIndicator,
   Alert,
+  KeyboardAvoidingView,
+  Pressable,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
-import { Link, useRouter } from "expo-router";
-import auth from "@react-native-firebase/auth";
-import { FirebaseError } from "firebase/app";
-import Colors from "@/constants/Colors";
-import firestore from "@react-native-firebase/firestore";
 
 const createUserDocument = async (
   uid: string,
@@ -30,9 +28,11 @@ const createUserDocument = async (
 };
 
 const isSecure = (password: string) => {
-  const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})");
+  const passwordRegex = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})"
+  );
   return passwordRegex.test(password);
-}
+};
 
 const Signup = () => {
   const router = useRouter();
@@ -52,7 +52,10 @@ const Signup = () => {
       Alert.alert("Error", "New password must be at least 6 characters long");
       return false;
     } else if (!isSecure(password)) {
-      Alert.alert("Error", "New password must contain at least one uppercase letter, one lowercase letter, and one number");
+      Alert.alert(
+        "Error",
+        "New password must contain at least one uppercase letter, one lowercase letter, and one number"
+      );
       return false;
     } else {
       return true;
@@ -127,15 +130,15 @@ const Signup = () => {
           <ActivityIndicator size={"small"} className="m-7" />
         ) : (
           <>
-            <Pressable className="items-center justify-center py-5 rounded-md bg-tintColor mt-2"
-                onPress={signUp}>
+            <Pressable
+              className="items-center justify-center py-5 rounded-md bg-tintColor mt-2"
+              onPress={signUp}
+            >
               <Text className="text-white text-xl">Sign Up</Text>
             </Pressable>
             <View className="items-center justify-center pt-2">
               <Link href="/login">
-                <Text className="text-blue">
-                  I already have an account
-                </Text>
+                <Text className="text-blue">I already have an account</Text>
               </Link>
             </View>
           </>

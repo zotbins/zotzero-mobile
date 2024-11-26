@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { View, Text, Pressable } from "react-native";
+import { Pressable, Text, View } from "react-native";
 // @ts-ignore
 import ProgressBar from "react-native-progress/Bar";
 import resolveConfig from "tailwindcss/resolveConfig";

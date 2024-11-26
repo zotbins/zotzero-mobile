@@ -1,15 +1,14 @@
-import React, { useRef, useState } from "react";
+import BinStatusModal from "@/components/BinStatusModal";
 import Mapbox, {
   Camera,
   LocationPuck,
   MapView,
   PointAnnotation,
-  ShapeSource,
 } from "@rnmapbox/maps";
-import { View, Image, Modal, Pressable } from "react-native";
-import { markers } from "../assets/markers.js";
+import React, { useRef, useState } from "react";
+import { Image, View } from "react-native";
 import ZotBinsLogo from "../assets/images/zotbins_logo.png";
-import BinStatusModal from "@/components/BinStatusModal";
+import { markers } from "../assets/markers.js";
 
 Mapbox.setAccessToken(process.env.EXPO_PUBLIC_MAPBOXACCESSTOKEN as string);
 Mapbox.setTelemetryEnabled(false);

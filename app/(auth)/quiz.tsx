@@ -1,9 +1,8 @@
-import { View, Text, StyleSheet, Pressable, Animated } from "react-native";
-import React, { useState } from "react";
-import Colors from "@/constants/Colors";
-import { Link, Stack, useRouter } from "expo-router";
-import data from "../../data/QuizData.js";
 import BackButton from "@/components/BackButton";
+import { Link, Stack, useRouter } from "expo-router";
+import React, { useState } from "react";
+import { Animated, Pressable, Text, View } from "react-native";
+import data from "../../data/QuizData.js";
 
 const Quiz = () => {
   const router = useRouter();
@@ -24,7 +23,8 @@ const Quiz = () => {
   const displayProgress = () => {
     return (
       <View className="w-full h-5 rounded-[20px] bg-black/20">
-        <Animated.View className="h-5 rounded-[20px] bg-tintColor"
+        <Animated.View
+          className="h-5 rounded-[20px] bg-tintColor"
           style={{ width: progressAnim }}
         ></Animated.View>
       </View>
@@ -40,15 +40,11 @@ const Quiz = () => {
 
     return (
       <View className="pt-8 pb-5">
-        <View
-          className="flex-row items-end"
-        >
+        <View className="flex-row items-end">
           <Text className="text-black text-2xl">
             {currentQuestionIndex + 1}{" "}
           </Text>
-          <Text className="text-black text-2xl">
-            / {questions.length}
-          </Text>
+          <Text className="text-black text-2xl">/ {questions.length}</Text>
         </View>
         <Text className="text-black text-4xl">
           {questions[currentQuestionIndex]?.question}
@@ -65,10 +61,13 @@ const Quiz = () => {
             key={option}
             disabled={isOptionsDisabled}
             className={`h-24 rounded-[10px] flex-row items-center justify-between px-5 my-3 
-              ${option == answer ? "bg-tintColor"
-              : option == currentSelected
-              ? "bg-red"
-              : "bg-blue" }`}
+              ${
+                option == answer
+                  ? "bg-tintColor"
+                  : option == currentSelected
+                  ? "bg-red"
+                  : "bg-blue"
+              }`}
             onPress={() => checkAnswer(option)}
           >
             <Text className="text-xl text-white">{option}</Text>
@@ -96,9 +95,7 @@ const Quiz = () => {
           className="w-full border-2 border-grey bg-white px-5 my-2.5 h-16 rounded-[10px] 
             flex-row items-center justify-center"
         >
-          <Text
-            className="text-2xl text-black text-center"
-          >
+          <Text className="text-2xl text-black text-center">
             {currentQuestionIndex == questions.length - 1
               ? "Show Results"
               : "Next Question"}
@@ -140,14 +137,8 @@ const Quiz = () => {
 
         {showResults && (
           <View>
-            <Text
-              className="text-5xl text-black text-center"
-            >
-              Results
-            </Text>
-            <Text
-              className="text-2xl text-black text-center"
-            >
+            <Text className="text-5xl text-black text-center">Results</Text>
+            <Text className="text-2xl text-black text-center">
               {score} / {questions.length}
             </Text>
             <View className="pt-12">

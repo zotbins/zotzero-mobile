@@ -1,19 +1,15 @@
+import auth from "@react-native-firebase/auth";
+import { Link, useRouter } from "expo-router";
+import { FirebaseError } from "firebase/app";
 import React, { useState } from "react";
 import {
-  Text,
-  View,
-  Pressable,
-  StyleSheet,
-  KeyboardAvoidingView,
-  TextInput,
   ActivityIndicator,
-  TouchableOpacity,
+  KeyboardAvoidingView,
+  Pressable,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
-import { Link } from "expo-router";
-import auth from "@react-native-firebase/auth";
-import { FirebaseError } from "firebase/app";
-import { useRouter } from "expo-router";
-import Colors from "@/constants/Colors";
 
 const Login = () => {
   const router = useRouter();
@@ -53,17 +49,18 @@ const Login = () => {
           placeholder="Password"
         />
         {loading ? (
-          <ActivityIndicator size={"small"} className="my-7"/>
+          <ActivityIndicator size={"small"} className="my-7" />
         ) : (
           <>
-            <Pressable onPress={signIn} className="items-center justify-center py-5 rounded-md bg-tintColor mt-2">
+            <Pressable
+              onPress={signIn}
+              className="items-center justify-center py-5 rounded-md bg-tintColor mt-2"
+            >
               <Text className="text-white">Login</Text>
             </Pressable>
             <View className="items-center justify-center pt-2">
               <Link href="/signup">
-                <Text className="text-blue">
-                  I don't have an account
-                </Text>
+                <Text className="text-blue">I don't have an account</Text>
               </Link>
             </View>
           </>

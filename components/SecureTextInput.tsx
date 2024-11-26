@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { TextInput, TouchableOpacity, View } from "react-native";
 
 interface SecureTextInputProps {
-    password: string;
-    setPassword: (text: string) => void;
-    placeholder: string;
-    className?: any;
+  password: string;
+  setPassword: (text: string) => void;
+  placeholder: string;
+  className?: any;
 }
 
-const SecureTextInput: React.FC<SecureTextInputProps> = ({ password, setPassword, placeholder, className }) => {
+const SecureTextInput: React.FC<SecureTextInputProps> = ({
+  password,
+  setPassword,
+  placeholder,
+  className,
+}) => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   return (
@@ -25,7 +30,11 @@ const SecureTextInput: React.FC<SecureTextInputProps> = ({ password, setPassword
         className="absolute right-0 top-0 h-full justify-center pr-3"
         onPress={() => setSecureTextEntry(!secureTextEntry)}
       >
-        <Ionicons name={secureTextEntry ? "eye-off" : "eye"} size={24} color="black" />
+        <Ionicons
+          name={secureTextEntry ? "eye-off" : "eye"}
+          size={24}
+          color="black"
+        />
       </TouchableOpacity>
     </View>
   );

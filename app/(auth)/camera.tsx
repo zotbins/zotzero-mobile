@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, SafeAreaView, Alert, ActivityIndicator } from "react-native";
-import { router, Stack } from "expo-router";
-import { Camera, useCameraDevice } from "react-native-vision-camera";
 import CameraView from "@/components/CameraView";
 import ScanResults from "@/components/ScanResults";
+import { router, Stack } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, Alert, SafeAreaView } from "react-native";
+import { Camera, useCameraDevice } from "react-native-vision-camera";
 
 const CameraScreen = () => {
   const [cameraVisible, setCameraVisible] = useState<boolean>(false);
@@ -13,13 +13,13 @@ const CameraScreen = () => {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
 
   const [camera, setCamera] = useState<Camera | null>(null);
-  const device = useCameraDevice('back');
+  const device = useCameraDevice("back");
 
   const requestCameraPermission = async () => {
     try {
       const permission = await Camera.requestCameraPermission();
-      
-      if (permission === 'granted') {
+
+      if (permission === "granted") {
         setHasPermission(true);
         if (device) {
           setCameraVisible(true);
@@ -28,7 +28,7 @@ const CameraScreen = () => {
         setHasPermission(false);
       }
     } catch (error) {
-      console.error('Camera permission error:', error);
+      console.error("Camera permission error:", error);
       setHasPermission(false);
     }
   };
@@ -41,8 +41,8 @@ const CameraScreen = () => {
       const photoPath = `file://${photo.path}`;
       setImage(photoPath);
     } catch (error) {
-      console.error('Take picture error:', error);
-      Alert.alert('Camera Error', 'Failed to take picture');
+      console.error("Take picture error:", error);
+      Alert.alert("Camera Error", "Failed to take picture");
     }
   };
 
@@ -54,9 +54,9 @@ const CameraScreen = () => {
     if (hasPermission === false || !device) {
       router.back();
       Alert.alert(
-        'Camera Unavailable', 
-        'Please ensure camera permissions are granted and a camera is available.',
-        [{ text: 'OK' }]
+        "Camera Unavailable",
+        "Please ensure camera permissions are granted and a camera is available.",
+        [{ text: "OK" }]
       );
     }
   }, [hasPermission, device]);

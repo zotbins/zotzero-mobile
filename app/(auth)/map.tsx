@@ -1,8 +1,8 @@
-import React from "react";
-import ZotBinsMap from "@/components/ZotBinsMap";
-import { View } from "react-native";
-import { Stack } from "expo-router";
 import BackButton from "@/components/BackButton";
+import ZotBinsMap from "@/components/ZotBinsMap";
+import { Stack } from "expo-router";
+import React from "react";
+import { View } from "react-native";
 
 const Map = () => {
   return (

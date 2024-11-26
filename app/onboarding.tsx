@@ -1,10 +1,10 @@
+import DotIndicator from "@/components/DotIndicator";
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 import OnboardingAbout from "../components/Onboarding/OnboardingAbout";
+import OnboardingEnd from "../components/Onboarding/OnboardingEnd";
 import OnboardingQuiz from "../components/Onboarding/OnboardingQuizFeature";
 import OnboardingScanner from "../components/Onboarding/OnboardingScannerFeature";
-import OnboardingEnd from "../components/Onboarding/OnboardingEnd";
-import DotIndicator from "@/components/DotIndicator";
 
 export default function Onboarding() {
   const [currentOffset, setCurrentOffset] = useState(0);
