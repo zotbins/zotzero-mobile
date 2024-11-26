@@ -2,6 +2,12 @@ import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
 import React, { useState } from "react";
 import auth from "@react-native-firebase/auth";
 import Colors from "@/constants/Colors";
+import SecureTextInput from "./SecureTextInput";
+
+const isSecure = (password: string) => {
+  const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})");
+  return passwordRegex.test(password);
+}
 
 interface PasswordChangeFormProps {
   onComplete: () => void;
@@ -14,6 +20,7 @@ const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onComplete }) =
   const [loading, setLoading] = useState(false);
   
   const user = auth().currentUser;
+
 
   const validatePasswords = () => {
     
@@ -34,6 +41,11 @@ const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onComplete }) =
 
     if (newPassword !== confirmPassword) {
       Alert.alert("Error", "New passwords don't match");
+      return false;
+    }
+
+    if (!isSecure(newPassword)) {
+      Alert.alert("Error", "New password must contain at least one uppercase letter, one lowercase letter, and one number");
       return false;
     }
 
@@ -126,7 +138,7 @@ const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onComplete }) =
         onPress={handleChangePassword}
         disabled={loading}
         className={`px-4 py-3 my-2 rounded-lg ${
-          loading ? "bg-blue-300" : "bg-blue-500"
+          loading ? "bg-blue" : "bg-blue"
         }`}
       >
         <Text className="text-white text-center">
