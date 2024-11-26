@@ -54,7 +54,7 @@ const Leaderboard = () => {
   const currentUser = { rank: userRank, username: "You", points: userScore };
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="pt-24">
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="pt-24 bg-white">
       <Stack.Screen
         options={{
           headerShadowVisible: false,
@@ -65,7 +65,7 @@ const Leaderboard = () => {
         }}
       />
       <View className="flex flex-col items-center p-4">
-      <Text className="text-xl bg-primary p-2 mb-4">
+      <Text className="text-xl bg-white p-2 mb-4">
         Rank {currentUser.rank} - {currentUser.username} - {currentUser.points}{" "}
         Points
       </Text>
